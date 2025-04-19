@@ -1,11 +1,424 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-1049994146066433">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="google-adsense-account" content="ca-pub-1049994146066433">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1049994146066433"
      crossorigin="anonymous"></script>
+  <title>Websico</title>
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  :root {
+    --purple: #4b0082;
+    --orange: #ff7f50;
+    --light-blue: #00bfff;
+    --white: #ffffff;
+    --dark-purple: #2e0854;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--purple) 60%, var(--orange) 25%, var(--light-blue) 15%);
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+  }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links li a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .auth-buttons a {
+      padding: 0.5rem 1rem;
+      background-color: var(--white);
+      color: var(--dark-purple);
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .auth-buttons a:hover {
+      background-color: #e0e0e0;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--white);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+   .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--purple) 50%, var(--light-blue) 50%);
+    color: var(--white);
+    position: relative;
+  }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+
+    .hero .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+      color: var(--dark-purple);
+      background-color: var(--white);
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero .btn:hover {
+      background-color: #e0e0e0;
+    }
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: var(--white);
+  color: var(--dark-purple);
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  overflow-y: auto; /* Makes the content scrollable */
+  max-height: 80vh; /* Makes the content fit on the screen */
+}
+
+.popup-content h2 {
+  margin-top: 0;
+  font-size: 1.75rem; /* Adjusted for better size */
+}
+
+.popup-content h3 {
+  font-size: 1.5rem; /* Adjusted size for subheadings */
+}
+
+.popup-content p, .popup-content ul {
+  font-size: 1rem; /* Adjusted text size */
+  line-height: 1.6;
+}
+
+.popup-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark-purple);
+}
+
+/* Mobile View (768px and below) */
+@media (max-width: 768px) {
+  .popup-content {
+    padding: 1rem; /* Reduced padding for mobile */
+  }
+
+  .popup-content h2 {
+    font-size: 1.5rem; /* Adjusted title size for mobile */
+  }
+
+  .popup-content h3 {
+    font-size: 1.25rem; /* Adjusted subheading size for mobile */
+  }
+
+  .popup-content p, .popup-content ul {
+    font-size: 0.9rem; /* Slightly smaller text for mobile */
+  }
+}
+
+    @media (max-width: 768px) {
+      .nav-links,
+      .auth-buttons {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding-bottom: 5px;
+        padding-top: 5px;
+      }
+        .auth-buttons{
+          
+          padding-left: 5px;
+        }
+       .nav-links{
+         
+         padding-top: 100px;       }
+
+      .nav-links.active,
+      .auth-buttons.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+    
+    
+    
+  </style>
 </head>
 <body>
-    This page is purely made for root domain Verification for Google AdSense. our website is on our subdomain <a href="https://klef.websico.in" > klef.websico.in </a>
+  <nav>
+   <a href="https://websico.in/" class="logo">Websico</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="https://klef.websico.in">Home</a></li>
+      <li><a href="#" onclick="openPopup('aboutPopup')">About</a></li>
+      <li><a href="#" onclick="openPopup('privacyPopup')">Privacy Policy</a></li>
+      <li><a href="https://klef.websico.in/contact/">contacts</a></li>
+      <li><a href="https://klef.websico.in/members/">Team</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="https://klef.websico.in/login/">Login</a>
+      <a href="https://klef.websico.in/signup/">Sign Up</a>
+    </div>
+  </nav>
+ <div class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Welcome to Websico Club</h1>
+    <p class="hero-description">
+      Websico is a student-driven organization revolutionizing web development education. Whether you're a beginner or looking to sharpen your skills, we're here to guide you every step of the way.
+    </p>
+    <a href="https://klef.websico.in/" class="btn hero-btn">Join Us & Explore</a>
+  </div>
+  
+</div>
+
+<!-- About Popup -->
+<div class="popup" id="aboutPopup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup('aboutPopup')">&times;</span>
+    <h2>About Websico</h2>
+    <p>Websico is a dynamic, student-led organization at the forefront of web development education. We guide participants from foundational web development concepts to advanced techniques, fostering a comprehensive understanding of the entire web creation process. Our curriculum combines theoretical insights with real-world projects, ensuring that members gain hands-on experience with both front-end and back-end development, service-side frameworks, APIs, and more. We focus on cultivating the technical skills needed to design, build, and optimize interactive and responsive websites.</p>
+    <p>At Websico, we provide resources through dedicated pages, such as our <strong>Resources</strong> and <strong>Projects</strong> pages. These platforms give users who are passionate about web development the opportunity to showcase their projects, collaborate with others, and gain exposure. We believe in empowering our community, and through these pages, we ensure that everyone can access valuable content and present their work to a wider audience.</p>
+    <p>Additionally, we regularly organize <strong>free events</strong> to help students gain hands-on experience and improve their web development skills. These events provide an excellent opportunity to learn from industry professionals, work on collaborative projects, and expand your network. At Websico, we aim to support continuous learning and encourage active participation in the evolving field of web development.</p>
+    <p>Through a supportive and inclusive community, we encourage collaboration, innovation, and engagement with the wider web development world.</p>
+  </div>
+</div>
+
+
+  <!-- Privacy Policy Popup -->
+<div class="popup" id="privacyPopup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup('privacyPopup')">&times;</span>
+    <h2>Privacy Policy</h2>
+    <div class="privacy-policy-content">
+      <h3>1. Information We Collect</h3>
+      <p>We may collect the following types of information when you visit our website:</p>
+      <ul>
+        <li><strong>Personal Information:</strong> If you contact us, subscribe to newsletters, or submit any forms, we may collect your name, email address, and other contact details.</li>
+        <li><strong>Log Files:</strong> Like many other websites, we collect and use data contained in log files. These may include your IP address, browser type, ISP (Internet Service Provider), referring/exit pages, date/time stamps, and possibly the number of clicks to analyze trends, administer the site, and gather demographic information.</li>
+        <li><strong>Cookies:</strong> We use cookies to enhance your experience on our site. Cookies are small files stored on your computer that help us track your activity, provide a personalized experience, and analyze website usage.</li>
+      </ul>
+
+      <h3>2. How We Use Your Information</h3>
+      <p>The information we collect from you may be used for the following purposes:</p>
+      <ul>
+        <li>To improve our website and enhance user experience.</li>
+        <li>To send you updates or newsletters (only if you’ve opted in).</li>
+        <li>To respond to inquiries or support requests.</li>
+        <li>To track and analyze trends, preferences, and behaviors.</li>
+      </ul>
+
+      <h3>3. Third-Party Services</h3>
+      <p>We may use third-party services (such as Google AdSense) to serve ads on our site. These third parties may use cookies and web beacons to collect information about your activity on this website and other websites to provide targeted ads based on your browsing habits.</p>
+      <p>For example, Google uses the DART cookie to serve ads based on your visit to our site and other sites on the internet. You can opt out of the DART cookie by visiting the <a href="https://policies.google.com/technologies/ads" target="_blank">Google Ad and Content Network Privacy Policy</a>.</p>
+
+      <h3>4. Data Retention</h3>
+      <p>We retain your personal data only for as long as necessary to fulfill the purposes outlined in this Privacy Policy. If you wish to delete your data or request that we no longer use it, please contact us via the information below.</p>
+
+      <h3>5. Your Data Protection Rights</h3>
+      <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+      <ul>
+        <li>Right to access – You can request a copy of your personal data.</li>
+        <li>Right to rectification – You can request that we correct or update any inaccurate or incomplete data.</li>
+        <li>Right to erasure – You can request that we delete your personal data.</li>
+        <li>Right to restrict processing – You can request that we limit the processing of your personal data.</li>
+        <li>Right to object to processing – You can object to our processing of your personal data for certain purposes.</li>
+      </ul>
+
+      <h3>6. Security of Your Information</h3>
+      <p>We use reasonable administrative, technical, and physical measures to protect the personal information you provide to us from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+
+      <h3>7. Changes to This Privacy Policy</h3>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any significant changes by updating the "Last updated" date at the top of this page.</p>
+
+      <h3>8. Contact Us</h3>
+      <p>If you have any questions about this Privacy Policy or wish to exercise your data protection rights, please contact us at:</p>
+      <p>Email: [websico.official.klef@gmail.com]</p>
+    </div>
+  </div>
+</div>
+
+<footer class="py-4" style="background-color: rgba(0, 0, 0, 0.3);">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    
+    <!-- Left side -->
+    <div class="d-flex align-items-center">
+      <span class="mb-0 text-white">© 2024 Websico</span>
+    </div>
+
+    <!-- Right side -->
+    <div class="d-flex align-items-center">
+     
+      <div>
+        <a href="https://www.instagram.com/websico_klef/" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+        <a href="https://t.me/Websico_Club" class="text-white me-3"><i class="bi bi-telegram"></i></a>
+        <a href="https://www.linkedin.com/company/websico-klef/" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/websico23" class="text-white"><i class="bi bi-github"></i></a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      const authButtons = document.querySelector('.auth-buttons');
+      navLinks.classList.toggle('active');
+      authButtons.classList.toggle('active');
+    }
+
+    function openPopup(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closePopup(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // Close popup when clicking outside the content
+    window.addEventListener('click', function(event) {
+      const aboutPopup = document.getElementById('aboutPopup');
+      const privacyPopup = document.getElementById('privacyPopup');
+      if (event.target === aboutPopup) {
+        aboutPopup.style.display = 'none';
+      }
+      if (event.target === privacyPopup) {
+        privacyPopup.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
+
+ 
